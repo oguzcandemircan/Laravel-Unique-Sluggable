@@ -11,9 +11,12 @@ class SlugController extends Controller
     public function index(Request $request, $slug)
     {
         $slug = Slug::findBySlug($slug);
-        $model = $slug->model;
-        if($model){
-            return $model->getController();
+        if ($slug) {
+            $model = $slug->model;
+            if ($model) {
+                return $model->getController();
+            }
         }
+        abort(404, 'slug not found');
     }
 }
