@@ -4,7 +4,7 @@
     "license": "MIT",
     "authors": [{
         "name": "Oğuzcan Demircan",
-        "email": "oguzcandemircan@gmail.com ",
+        "email": "oguzcandemircan@gmail.com",
         "homepage": "https://oguzcandemircan.com"
     }],
     "homepage": "https://github.com/oguzcandemircan/laraveluniquesluggable",
