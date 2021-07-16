@@ -1,7 +1,7 @@
 {
     "name": "oguzcandemircan/laraveluniquesluggable",
     "description": "Package to create unique slug for eloquent models",
-    "license": "license",
+    "license": "MIT",
     "authors": [{
         "name": "Oğuzcan Demircan",
         "email": "oguzcandemircan@gmail.com ",
