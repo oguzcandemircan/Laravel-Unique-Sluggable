@@ -4,13 +4,14 @@
     "license": "MIT",
     "authors": [{
         "name": "Oğuzcan Demircan",
-        "email": "oguzcandemircan@gmail.com ",
+        "email": "oguzcandemircan@gmail.com",
         "homepage": "https://oguzcandemircan.com"
     }],
     "homepage": "https://github.com/oguzcandemircan/laraveluniquesluggable",
     "keywords": ["Laravel", "Sluggable", "Slug", "Unique Slug"],
     "require": {
-        "illuminate/support": "~7|~8"
+        "illuminate/support": "~7|~8",
+        "cviebrock/eloquent-sluggable": "^8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~9.0",
