@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace OguzcanDemircan\LaravelUniqueSluggable;
 
 use LogicException;
 use Illuminate\Database\Eloquent\Model;
