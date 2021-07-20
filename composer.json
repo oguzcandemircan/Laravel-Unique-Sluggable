@@ -1,13 +1,13 @@
 {
-    "name": "oguzcandemircan/laraveluniquesluggable",
-    "description": "Package to create unique slug for eloquent models",
+    "name": "oguzcandemircan/laravel-unique-sluggable",
+    "description": "This package allows you to create unique slugs. It keeps all the slugs you define in the slugs table. It also satisfies all requests and directs it to the controller you define in your model.",
     "license": "MIT",
     "authors": [{
         "name": "Oğuzcan Demircan",
         "email": "oguzcandemircan@gmail.com",
         "homepage": "https://oguzcandemircan.com"
     }],
-    "homepage": "https://github.com/oguzcandemircan/laraveluniquesluggable",
+    "homepage": "https://github.com/oguzcandemircan/laravel-unique-sluggable",
     "keywords": ["Laravel", "Sluggable", "Slug", "Unique Slug"],
     "require": {
         "illuminate/support": "~7|~8",

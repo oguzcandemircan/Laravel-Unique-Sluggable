@@ -7,7 +7,7 @@ This package allows you to create unique slugs. It keeps all the slugs you defin
 
 ## Installation
 ``` bash
-composer require oguzcandemircan/laraveluniquesluggable
+composer require oguzcandemircan/laravel-unique-sluggable
 ```
 
 ## Usage
