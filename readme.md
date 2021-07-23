@@ -37,6 +37,18 @@ Page::create(['title' => 'Great Title']);
 Post::create(['title' => 'Great Title']);
 //you get eror
 ```
+Register route:
+```php
+//RouteServiceProvier.php
+...
+public function boot()
+{
+//Other your routes..
+LaravelUniqueSluggable::registerRoutes();
+}
+```
+> :warning: **LaravelUniqueSluggable::registerRoutes()** Laravel Unique Sluggable::registerRoutes() should be at the bottom of all route definitions!
+
 If you want all your requests to be captured and routed automatically, you should add the `controller` property to your model.
 ```php
 protected $controller [PageController::class, 'show'];
