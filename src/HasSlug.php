@@ -13,26 +13,15 @@ use OguzcanDemircan\LaravelUniqueSluggable\Models\Slug;
  */
 trait HasSlug
 {
-    //public $controller;
-
-    public function __construct()
+    public static function bootHasSlug(): void
     {
-        if(!$this->route) {
-            throw new LogicException(get_class($this) . ' must have a $route');
+        if (!property_exists(self::class, 'route')) {
+            throw new LogicException(self::class . ' must have a $route property');
         }
-        if(! is_array($this->route)) {
-            throw new LogicException('$controller must array');
-        }
-    }
+        // if (!is_array(static::$route)) {
+        //     throw new LogicException('$controller must array');
+        // }
 
-    public function getController()
-    {
-        list($controller, $method) = $this->route;
-        return app($controller)->$method($this);
-    }
-
-    public static function bootSlugTrait()
-    {
         static::deleted(function (Model $model) {
             $model->removeSlugAttribute();
         });
@@ -48,8 +37,8 @@ trait HasSlug
 
     public function getSlug()
     {
-        $slugSource = $this->slugSource ?? 'name';
-        return $this->attributes[$slugSource];
+        $slugSource = $this->slugSource ?? 'title';
+        return $this->getAttribute($slugSource);
     }
 
     /**
@@ -104,5 +93,11 @@ trait HasSlug
     public function removeSlugAttribute(): void
     {
         $this->sluggable()->findBySlug($this->slug)->delete();
+    }
+
+    public function getController()
+    {
+        list($controller, $method) = $this->route;
+        return app($controller)->$method($this);
     }
 }
