@@ -8,8 +8,10 @@ use OguzcanDemircan\LaravelUniqueSluggable\Models\Slug;
 
 class SlugController extends Controller
 {
-    public function index(Request $request, $slug)
+    public function index(Request $request)
     {
+        $params = request()->segments();
+        $slug = end($params);
         $slug = Slug::findBySlug($slug);
         if ($slug) {
             $model = $slug->model;
