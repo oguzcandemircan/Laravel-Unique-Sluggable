@@ -72,11 +72,11 @@ If you discover any security related issues, please email author email instead o
 
 license. Please see the [license file](LISANCE) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/oguzcandemircan/laraveluniquesluggable.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/oguzcandemircan/laraveluniquesluggable.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/oguzcandemircan/laravel-unique-sluggable.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/oguzcandemircan/laravel-unique-sluggable.svg?style=flat-square
 
 
-[link-packagist]: https://packagist.org/packages/oguzcandemircan/laraveluniquesluggable
-[link-downloads]: https://packagist.org/packages/oguzcandemircan/laraveluniquesluggable
+[link-packagist]: https://packagist.org/packages/oguzcandemircan/laravel-unique-sluggable
+[link-downloads]: https://packagist.org/packages/oguzcandemircan/laravel-unique-sluggable
 [link-author]: https://github.com/oguzcandemircan
 [link-contributors]: ../../contributors
