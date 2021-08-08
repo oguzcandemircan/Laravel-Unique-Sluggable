@@ -31,10 +31,10 @@ class LaravelUniqueSluggableServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/laraveluniquesluggable.php', 'laraveluniquesluggable');
+        $this->mergeConfigFrom(__DIR__ . '/../config/laravel-unique-sluggable.php', 'laravel-unique-sluggable');
 
         // Register the service the package provides.
-        $this->app->singleton('laraveluniquesluggable', function ($app) {
+        $this->app->singleton('laravel-unique-sluggable', function ($app) {
             return new LaravelUniqueSluggable;
         });
     }
@@ -46,7 +46,7 @@ class LaravelUniqueSluggableServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['laraveluniquesluggable'];
+        return ['laravel-unique-sluggable'];
     }
 
     /**
@@ -58,23 +58,23 @@ class LaravelUniqueSluggableServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__ . '/../config/laraveluniquesluggable.php' => config_path('laraveluniquesluggable.php'),
-        ], 'laraveluniquesluggable.config');
+            __DIR__ . '/../config/laravel-unique-sluggable.php' => config_path('laravel-unique-sluggable.php'),
+        ], 'laravel-unique-sluggable.config');
 
         // Publishing the views.
         /*$this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/oguzcandemircan'),
-        ], 'laraveluniquesluggable.views');*/
+        ], 'laravel-unique-sluggable.views');*/
 
         // Publishing assets.
         /*$this->publishes([
             __DIR__.'/../resources/assets' => public_path('vendor/oguzcandemircan'),
-        ], 'laraveluniquesluggable.views');*/
+        ], 'laravel-unique-sluggable.views');*/
 
         // Publishing the translation files.
         /*$this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/oguzcandemircan'),
-        ], 'laraveluniquesluggable.views');*/
+        ], 'laravel-unique-sluggable.views');*/
 
         // Registering package commands.
         // $this->commands([]);
