@@ -4,7 +4,7 @@ namespace OguzcanDemircan\LaravelUniqueSluggable\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class Slug extends Model
 {
