@@ -3,9 +3,9 @@
 namespace OguzcanDemircan\LaravelUniqueSluggable;
 
 use LogicException;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Cviebrock\EloquentSluggable\Services\SlugService;
 use OguzcanDemircan\LaravelUniqueSluggable\Models\Slug;
 
 /**
@@ -18,9 +18,6 @@ trait HasSlug
         if (!property_exists(self::class, 'route')) {
             throw new LogicException(self::class . ' must have a $route property');
         }
-        // if (!is_array(static::$route)) {
-        //     throw new LogicException('$controller must array');
-        // }
 
         static::deleted(function (Model $model) {
             $model->removeSlugAttribute();
@@ -35,17 +32,20 @@ trait HasSlug
         });
     }
 
-    public function getSlug()
+    public function getSlug(): string
     {
-        $slugSource = $this->slugSource ?? 'title';
+        $slugSource = $this->getSlugSource();
         return $this->getAttribute($slugSource);
     }
 
-    /**
-     * Sluggable Relation
-     *
-     * @return object
-     */
+    public function getSlugSource(): string
+    {
+        if (property_exists($this, 'slugSource')) {
+            return $this->slugSource;
+        }
+        return config('laravel-unique-sluggable.default_slug_source');
+    }
+
     public function sluggable(): MorphOne
     {
         return $this->morphOne(Slug::class, 'sluggable');
@@ -69,21 +69,47 @@ trait HasSlug
      */
     public function createOrUpdateSlug(): void
     {
-        $slug = SlugService::createSlug(Slug::class, 'slug', $this->getSlug());
-        $this->sluggable()->updateOrCreate($this->getWhere(), [
-            'slug' => $slug
-        ]);
+        $seperator = config('laravel-unique-sluggable.seperator');
+        $language = config('laravel-unique-sluggable.language');
+        $slug = Str::slug(
+            $this->getSlug(),
+            $seperator,
+            $language
+        );
+
+        $slugModel = $this->sluggable;
+
+        if (config('laravel-unique-sluggable.if_slug_exists_get_validation_error')) {
+            if ($this->checkSlugExists($slug, optional($slugModel)->slug)) {
+                throw \Illuminate\Validation\ValidationException::withMessages([
+                    'slug' => ["[$slug] already taken"],
+            ]);
+            }
+        } else {
+            $i = 1;
+            $originalSlug = $slug;
+            while ($this->checkSlugExits($slug, optional($slugModel)->slug)) {
+                $i++;
+                $slug = $originalSlug.$seperator.$i;
+            }
+        }
+
+        if ($slugModel) {
+            if (config('laravel-unique-sluggable.update_slug_when_model_is_updated')) {
+                $this->sluggable()->update(['slug' => $slug]);
+            }
+        } else {
+            $this->sluggable()->create(['slug' => $slug]);
+        }
     }
 
 
-    public function getWhere(): array
+    public function checkSlugExits($newSlug, $originalSlug): bool
     {
-        return [
-            'sluggable_id' => $this->id,
-            'sluggable_type' => get_class($this)
-        ];
+        return Slug::where('slug', '!=', $originalSlug)
+            ->where('slug', $newSlug)
+            ->exists();
     }
-
 
     /**
      * Remove slug
@@ -92,7 +118,7 @@ trait HasSlug
      */
     public function removeSlugAttribute(): void
     {
-        $this->sluggable()->findBySlug($this->slug)->delete();
+        $this->sluggable()->where('slug', $this->slug)->delete();
     }
 
     public function getController()
