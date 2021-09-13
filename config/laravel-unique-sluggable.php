@@ -11,7 +11,7 @@ return [
 
     'seperator' => '-',
 
-    'langauge' => app()->getLocale(),
+    'language' => app()->getLocale(),
 
     'if_slug_exists_get_validation_error' => false,
 
